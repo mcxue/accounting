@@ -1,6 +1,9 @@
 <template>
   <div>
     <div class="router-wrapper">
+      <svg>
+        <use xlink:href="#add"></use>
+      </svg>
       <router-link to="/home">主页</router-link>
       <router-link to="/detail">明细</router-link>
       <router-link to="/account">记账</router-link>
@@ -13,7 +16,9 @@
 <script lang="ts">
   import Vue from 'vue';
   import {Component} from 'vue-property-decorator';
-  
+  import add from '@/assets/icons/add.svg'
+  console.log(add);
+
   @Component
   export default class Nav extends Vue {
   }
