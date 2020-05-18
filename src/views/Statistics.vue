@@ -1,9 +1,8 @@
 <template>
-  <div>    <Top/>
-    <br>
+  <div>
+  <Layout>
     <div>Statistics</div>
-    <br>
-    <Nav/>
+  </Layout>
   </div>
 </template>
 

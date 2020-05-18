@@ -1,10 +1,9 @@
 <template>
   <div>
-    <Top/>
-    <br>
-    <div>Home</div>
-    <br>
-    <Nav/>
+    <Layout>
+      <div>Home</div>
+    </Layout>
+
   </div>
 </template>
 

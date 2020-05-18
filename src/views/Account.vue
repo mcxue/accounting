@@ -1,10 +1,8 @@
 <template>
   <div>
-    <Top/>
-    <br>
-    <div>Account</div>
-    <br>
-    <Nav/>
+    <Layout>
+      <div>Account</div>
+    </Layout>
   </div>
 </template>
 

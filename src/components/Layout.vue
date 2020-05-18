@@ -1,8 +1,8 @@
 <template>
   <div>
-    <Layout>
-      <div>Detail</div>
-    </Layout>
+    <Top/>
+    <slot/>
+    <Nav/>
   </div>
 </template>
 
@@ -11,7 +11,7 @@
   import {Component} from 'vue-property-decorator';
   
   @Component
-  export default class Detail extends Vue {
+  export default class Layout extends Vue {
     
   }
 </script>
