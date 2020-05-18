@@ -1,5 +1,7 @@
 <template>
   <div class="account">
+    <router-link to="/home">主页</router-link>
+    <br>
     <div>Account</div>
   </div>
 </template>

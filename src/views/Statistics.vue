@@ -1,5 +1,6 @@
 <template>
   <div class="statistic">
+    <router-link to="/home">主页</router-link>,
     <div>Statistics</div>
   </div>
 </template>

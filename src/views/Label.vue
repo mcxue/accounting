@@ -1,5 +1,7 @@
 <template>
   <div class="label">
+    <router-link to="/home">主页</router-link>
+    <br>
     <div>Label</div>
   </div>
 </template>
