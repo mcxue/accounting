@@ -1,15 +1,16 @@
 <template>
-  <div class="account">
-    <router-link to="/home">主页</router-link>
+  <div>
+    <Top/>
     <br>
     <div>Account</div>
+    <br>
+    <Nav/>
   </div>
 </template>
 
 <script lang="ts">
   import Vue from 'vue';
   import {Component} from 'vue-property-decorator';
-  
   @Component
   export default class Account extends Vue {
     

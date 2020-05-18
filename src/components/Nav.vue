@@ -1,9 +1,11 @@
 <template>
   <div>
     <div class="router-wrapper">
-      <router-link class="label" to="/label">标签</router-link>|
-      <router-link class="account" to="/account">记账</router-link>|
-      <router-link class="statistics" to="/statistics">统计</router-link>
+      <router-link to="/home">主页</router-link>
+      <router-link to="/detail">明细</router-link>
+      <router-link to="/account">记账</router-link>
+      <router-link to="/label">标签</router-link>
+      <router-link to="/account">统计</router-link>
     </div>
   </div>
 </template>
@@ -14,7 +16,6 @@
   
   @Component
   export default class Nav extends Vue {
-    
   }
 </script>
 

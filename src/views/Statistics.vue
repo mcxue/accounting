@@ -1,7 +1,9 @@
 <template>
-  <div class="statistic">
-    <router-link to="/home">主页</router-link>,
+  <div>    <Top/>
+    <br>
     <div>Statistics</div>
+    <br>
+    <Nav/>
   </div>
 </template>
 

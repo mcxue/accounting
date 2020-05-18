@@ -1,8 +1,10 @@
 <template>
-  <div class="label">
-    <router-link to="/home">主页</router-link>
+  <div>
+    <Top/>
     <br>
     <div>Label</div>
+    <br>
+    <Nav/>
   </div>
 </template>
 

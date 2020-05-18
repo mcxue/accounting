@@ -16,7 +16,7 @@ const routes = [
   {path: '/account', component: Account},
   {path:'/label',component: Label},
   {path:'/statistics',component: Statistics},
-  {path:'/*',component: NotFound}
+  {path:'*',component: NotFound}
 ];
 
 const router = new VueRouter({

@@ -1,10 +1,6 @@
 <template>
   <div>
-    <Top/>
-    <br>
-    <div>Detail</div>
-    <br/>
-    <Nav/>
+    浪浪记账
   </div>
 </template>
 
@@ -13,7 +9,7 @@
   import {Component} from 'vue-property-decorator';
   
   @Component
-  export default class Detail extends Vue {
+  export default class Top extends Vue {
     
   }
 </script>
