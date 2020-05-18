@@ -22,11 +22,12 @@ import Icon from '@/components/Icon.vue';
 <style lang="scss" scoped>
   @import "~@/assets/reset.scss";
   nav{
-    background: #eeeeee;
+    background: #e5e5e5;
     font-size: 13px;
     display: flex;
     justify-content:center;
     align-items: center;
+    box-shadow: 0 0 2px rgba(0,0,0,0.2);
     .item{
       width:20%;
       padding: 5px 0;
