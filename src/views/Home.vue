@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Layout>
+    <Layout name="首页">
       <div>Home</div>
     </Layout>
   </div>

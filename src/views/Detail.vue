@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Layout>
+    <Layout name="明细">
       <div>Detail</div>
     </Layout>
   </div>

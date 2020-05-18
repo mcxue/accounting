@@ -1,35 +1,42 @@
 <template>
-  <div>
-    <div class="router-wrapper">
-      <svg>
-        <use xlink:href="#add"></use>
-      </svg>
-      <router-link to="/home">主页</router-link>
-      <router-link to="/detail">明细</router-link>
-      <router-link to="/account">记账</router-link>
-      <router-link to="/label">标签</router-link>
-      <router-link to="/account">统计</router-link>
-    </div>
-  </div>
+    <nav>
+      <router-link to="/home" class="item" active-class="selected"><Icon name="home"/>主页</router-link>
+      <router-link to="/detail" class="item" active-class="selected"><Icon name="detail"/>明细</router-link>
+      <router-link to="/account" class="item" active-class="selected"><Icon name="add"/>记账</router-link>
+      <router-link to="/label" class="item" active-class="selected"><Icon name="label"/>标签</router-link>
+      <router-link to="/statistics" class="item" active-class="selected"><Icon name="statistics"/>统计</router-link>
+    </nav>
 </template>
 
 <script lang="ts">
-  import Vue from 'vue';
-  import {Component} from 'vue-property-decorator';
-  import add from '@/assets/icons/add.svg'
-  console.log(add);
-
-  @Component
+import Vue from 'vue';
+import {Component} from 'vue-property-decorator';
+import Icon from '@/components/Icon.vue';
+@Component({
+  components: {Icon}
+})
   export default class Nav extends Vue {
   }
 </script>
 
 <style lang="scss" scoped>
   @import "~@/assets/reset.scss";
-  .router-wrapper{
+  nav{
+    background: #eeeeee;
+    font-size: 13px;
     display: flex;
-    justify-content: space-between;
-    border:1px solid red;
-    margin:0 auto
+    justify-content:center;
+    align-items: center;
+    .item{
+      width:20%;
+      padding: 5px 0;
+      display:flex;
+      flex-direction:column;
+      justify-content: center;
+      align-items: center;
+    }
+    .item.selected{
+      color:blue;
+    }
   }
 </style>

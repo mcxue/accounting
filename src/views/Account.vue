@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Layout>
+    <Layout name="记账">
       <div>Account</div>
     </Layout>
   </div>

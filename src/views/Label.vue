@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Layout>
+    <Layout name="标签">
     <div>Label</div>
     </Layout>
   </div>
