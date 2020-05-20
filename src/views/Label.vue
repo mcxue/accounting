@@ -1,6 +1,7 @@
 <template>
   <div>
     <Layout name="标签">
+      <Type />
     <div>Label</div>
     </Layout>
   </div>
@@ -9,8 +10,10 @@
 <script lang="ts">
   import Vue from 'vue';
   import {Component} from 'vue-property-decorator';
-  
-  @Component
+  import Type from '@/components/Type.vue';
+  @Component({
+    components: {Type}
+  })
   export default class Label extends Vue {
     
   }
