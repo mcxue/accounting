@@ -3,7 +3,7 @@
       <Type/>
       <Choice/>
       <Note/>
-      <Show/>
+      <Show @ok="onOutputChange"/>
       <Write/>
     </Layout>
 </template>
@@ -17,11 +17,15 @@
   import Write from '@/components/Account/Write.vue';
   import Show from '@/components/Account/Show.vue';
 
+
   @Component({
-    components: {Show, Write, Note, Choice, Type}
-  })
+    components: {Show, Write, Note, Choice, Type},
+  },)
   export default class Account extends Vue {
-    
+    output='0';
+    onOutputChange(){
+      console.log("检测到 output 变化啦")
+    }
   }
 </script>
 

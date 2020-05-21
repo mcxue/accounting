@@ -1,17 +1,24 @@
 <template>
   <ul>
-    <li class="selected">支出</li>
-    <li>收入</li>
+    <li :class="{selected: type==='+'}" @click="selectA">支出</li>
+    <li :class="{selected: type==='-'}" @click="selectB">收入</li>
   </ul>
 </template>
 
 <script lang="ts">
   import Vue from 'vue';
   import {Component} from 'vue-property-decorator';
-  
+
   @Component
-  export default class Top2 extends Vue {
-    
+  export default class Type extends Vue {
+    typeList=['+','-'];
+    type='+';
+    selectA(){
+      this.type=this.typeList[0]
+    }
+    selectB(){
+      this.type=this.typeList[1]
+    }
   }
 </script>
 

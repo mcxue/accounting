@@ -6,6 +6,8 @@ import store from './store';
 import Nav from '@/components/Nav.vue';
 import Top from '@/components/Top.vue';
 import Layout from '@/components/Layout.vue';
+import personStore from '@/store/personStore';
+
 
 Vue.config.productionTip = false;
 Vue.component('Top',Top);

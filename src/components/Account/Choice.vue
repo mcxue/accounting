@@ -3,10 +3,6 @@
     <div>类别</div>
     <ul>
       <li class="selected">默认</li>
-      <li>衣</li>
-      <li>食</li>
-      <li>住</li>
-      <li>行</li>
     </ul>
   </div>
 
@@ -15,8 +11,15 @@
 <script lang="ts">
   import Vue from 'vue';
   import {Component} from 'vue-property-decorator';
+  import store from '@/store';
   
-  @Component
+  @Component({
+    computed:{
+      labelList(){
+        return store.state.labelList
+      }
+    }
+  })
   export default class Choice extends Vue {
     
   }
