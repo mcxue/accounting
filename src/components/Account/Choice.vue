@@ -2,26 +2,37 @@
   <div class="choice-wrapper">
     <div>类别</div>
     <ul>
-      <li class="selected">默认</li>
+      <li v-for="value in data" :key="value"
+          :class="{selected:selected===value}"
+          @click="toggle(value)">{{value}}</li>
     </ul>
+    <button @click="createLabel">新增标签</button>
   </div>
 
 </template>
 
 <script lang="ts">
   import Vue from 'vue';
-  import {Component} from 'vue-property-decorator';
-  import store from '@/store';
-  
-  @Component({
-    computed:{
-      labelList(){
-        return store.state.labelList
+  import {Component, Prop} from 'vue-property-decorator';
+
+  @Component
+  export default class Choice extends Vue {
+    @Prop() readonly data!: string[];
+    @Prop() readonly selected!: string;
+    toggle(label: string){
+      this.$emit('update:selected',label)
+    }
+
+    createLabel(){
+      const name = window.prompt("请输入标签名");
+      if(name ===''){
+        window.alert('标签名不能为空')
+      }else{
+        if(this.data){
+          this.$emit('update:data',[...this.data,name])
+        }
       }
     }
-  })
-  export default class Choice extends Vue {
-    
   }
 </script>
 

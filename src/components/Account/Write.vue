@@ -11,7 +11,7 @@
     <button @click="inputContent">7</button>
     <button @click="inputContent">8</button>
     <button @click="inputContent">9</button>
-    <button class="ok">确认</button>
+    <button @click="ok" class="ok">确认</button>
     <button @click="inputContent" class="zero">0</button>
     <button @click="inputContent">.</button>
   </div>
@@ -27,16 +27,17 @@
     remove(){
       // todo
       personStore.remove();
-      console.log(personStore.output)
     }
     empty(){
       personStore.empty();
-      console.log(personStore.output)
 
     }
     inputContent(event: MouseEvent){
       personStore.inputContent(event);
-      console.log(personStore.output)
+    }
+    ok(){
+      this.$emit('update:amount',personStore.output);
+      this.$emit('submit',personStore.output);
     }
   }
 </script>

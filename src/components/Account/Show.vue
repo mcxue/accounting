@@ -1,23 +1,15 @@
 <template>
   <div class="show">
     <div class="text">金额</div>
-    <div class="number">{{output}}</div>
+    <div class="number"></div>
   </div>
 </template>
 
 <script lang="ts">
   import Vue from 'vue';
   import {Component} from 'vue-property-decorator';
-  import personStore from '@/store/personStore'
-  
-  @Component({
-    // todo
-    computed:{
-      output(){
-        return personStore.output;
-      }
-    }
-  })
+
+  @Component
   export default class Show extends Vue {
   }
 </script>
