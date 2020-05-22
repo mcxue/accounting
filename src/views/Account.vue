@@ -1,7 +1,7 @@
 <template>
   <Layout name="记账" class-prefix="layout">
     <Type :type.sync="record.type"/>
-    <Choice :selected.sync="record.choice" :data.sync="labelList"/>
+    <Choice :selected.sync="record.choice" :data.sync="labels"/>
     <Note :value="record.note" @update:note="onUpdateNote"/>
     <Show @ok="onOutputChange"/>
     <Write @update:amount="onUpdateAmount" @submit="saveRecord"/>
@@ -10,21 +10,23 @@
 
 <script lang="ts">
   import Vue from 'vue';
-  import {Component, Watch} from 'vue-property-decorator';
+  import {Component} from 'vue-property-decorator';
   import Type from '@/components/Type.vue';
   import Choice from '@/components/Account/Choice.vue';
   import Note from '@/components/Account/Note.vue';
   import Write from '@/components/Account/Write.vue';
   import Show from '@/components/Account/Show.vue';
-  import { model } from './model';
+  import { modelListModel } from './models/recordListModel';
+  import {labelListModel} from '@/views/models/labelListModel';
 
-  const records = model.fetch();
+  const records = modelListModel.fetch();
+  const labelList = labelListModel.fetch();
 
   @Component({
     components: {Show, Write, Note, Choice, Type},
   })
   export default class Account extends Vue {
-    labelList = ['默认', '衣', '食', '住', '行'];
+    labels = labelList;
     record: RecordList = {type: '+',choice:'默认',note: '',amount: 123};
     output = '0';
 
@@ -41,8 +43,8 @@
     }
     saveRecord(){
       this.record.createdAt = new Date;
-      records.push(model.clone(this.record));
-      model.save(records);
+      records.push(modelListModel.clone(this.record));
+      modelListModel.save(records);
       console.log(records);
 
     }

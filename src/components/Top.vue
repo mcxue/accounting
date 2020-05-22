@@ -29,7 +29,7 @@
     padding: 18px 20px;
     color: #fff;
     background: $color-sky-blue;
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid rgba(255,255,255,0.5);
     .icon{
       width:25px;
       height:25px;

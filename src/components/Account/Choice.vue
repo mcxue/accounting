@@ -6,7 +6,6 @@
           :class="{selected:selected===value}"
           @click="toggle(value)">{{value}}</li>
     </ul>
-    <button @click="createLabel">新增标签</button>
   </div>
 
 </template>
