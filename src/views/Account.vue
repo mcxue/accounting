@@ -19,7 +19,6 @@
   import { modelListModel } from './models/recordListModel';
   import {labelListModel} from '@/views/models/labelListModel';
 
-  const records = modelListModel.fetch();
   const labelList = labelListModel.fetch().map(item=>item.name);
 
   @Component({
@@ -43,10 +42,8 @@
     }
     saveRecord(){
       this.record.createdAt = new Date;
-      records.push(modelListModel.clone(this.record));
-      modelListModel.save(records);
-      console.log(records);
-
+      modelListModel.data.push(modelListModel.clone(this.record));
+      modelListModel.save();
     }
   }
 </script>
