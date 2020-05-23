@@ -5,11 +5,11 @@
         全部标签
       </div>
       <ul class="labels">
-        <li v-for="label in labels" :key="label">
+        <li v-for="label in labels" :key="label" @click.capture="clickLabel=label">
           <span>{{label}}</span>
           <div>
-            <Icon name="edit"/>
-            <Icon name="delete"/>
+            <Icon :value="label" name="edit" @click="editLabel"/>
+            <Icon name="delete" @click="deleteLabel"/>
           </div>
         </li>
       </ul>
@@ -31,21 +31,48 @@
     components: {Type}
   })
   export default class Label extends Vue {
-    labels = labelListModel.data;
+    labels = labelListModel.data.map(item => item.name);
+    clickLabel = '';
 
     createLabel() {
       const name = window.prompt('请输入标签名');
-      if(name){
+      if (name) {
         const message = labelListModel.create(name);
         if (message === 'duplicated') {
           window.alert('标签名重复啦');
-        }else{
-          window.alert('新建标签成功')
+        } else {
+          window.alert('新建标签成功');
+          this.labels = labelListModel.data.map(item => item.name);
         }
-      }else{
-        window.alert('标签名不能为空')
+      } else {
+        window.alert('标签名不能为空');
       }
+    }
 
+    editLabel() {
+      const name = window.prompt('请输入新的标签名');
+      if (name) {
+        const message = labelListModel.edit(this.clickLabel, name);
+        if (message === 'duplicated') {
+          window.alert('标签名重复啦');
+        } else {
+          window.alert('编辑标签名成功');
+          this.labels = labelListModel.data.map(item => item.name);
+        }
+      } else {
+        window.alert('标签名不能为空');
+      }
+    }
+
+    deleteLabel() {
+      console.log(this.clickLabel);
+      const message = labelListModel.delete(this.clickLabel);
+      if(message ==='success'){
+        window.alert('删除标签成功');
+        this.labels = labelListModel.data.map(item => item.name);
+      }else{
+        window.alert('删除标签失败')
+      }
     }
   }
 </script>

@@ -20,7 +20,7 @@
   import {labelListModel} from '@/views/models/labelListModel';
 
   const records = modelListModel.fetch();
-  const labelList = labelListModel.fetch();
+  const labelList = labelListModel.fetch().map(item=>item.name);
 
   @Component({
     components: {Show, Write, Note, Choice, Type},

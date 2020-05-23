@@ -1,22 +1,59 @@
+import '@/lib/generatorId.ts';
+import generatorId from '@/lib/generatorId';
+
 const localStorageKeyName = 'labelList';
 
+type OneLabel = {
+  id: string;
+  name: string;
+}
+
 type labelListModel = {
-  data: string[];
-  fetch: () => string[];
+  data: OneLabel[];
+  fetch: () => OneLabel[];
   create: (name: string) => 'success' | 'duplicated'; // 联合类型
+  edit: (oldName: string, newName: string) => 'success' | 'duplicated';
+  delete: (name: string) => 'success' | 'fail';
   save: () => void;
 }
 
 const labelListModel: labelListModel = {
   data: [],
   create(name) {
-    if (this.data.indexOf(name) >= 0) {
+    const names = this.data.map(item => item.name);
+    if (names.indexOf(name) >= 0) {
       return 'duplicated';
     } else {
-      this.data.push(name);
+      const id = generatorId().toString();
+      this.data.push({id, name: name});
       this.save();
       return 'success';
     }
+  },
+  edit(oldName, newName) {
+    const names = this.data.map(item => item.name);
+    const index = names.indexOf(oldName);
+    if (names.indexOf(newName)>=0) {
+      console.log('执行到这里了');
+      return 'duplicated';
+    } else {
+      this.data[index].name = newName;
+      this.save();
+      return 'success';
+    }
+    
+  },
+  delete(name: string) {
+    const names = this.data.map(item => item.name);
+    const index = names.indexOf(name);
+    if( index>=0){
+      this.data.splice(index, 1);
+      this.save();
+      return 'success'
+    }else{
+      return 'fail'
+    }
+    
   },
   fetch() {
     this.data = JSON.parse(window.localStorage.getItem(localStorageKeyName) || '[]');
