@@ -16,7 +16,7 @@
   import Note from '@/components/Account/Note.vue';
   import Write from '@/components/Account/Write.vue';
   import Show from '@/components/Account/Show.vue';
-  import { modelListModel } from './models/recordListModel';
+  import { recordListModel } from './models/recordListModel';
   import {labelListModel} from '@/views/models/labelListModel';
 
   const labelList = labelListModel.fetch().map(item=>item.name);
@@ -42,8 +42,7 @@
     }
     saveRecord(){
       this.record.createdAt = new Date;
-      modelListModel.data.push(modelListModel.clone(this.record));
-      modelListModel.save();
+      recordListModel.create(this.record);
     }
   }
 </script>

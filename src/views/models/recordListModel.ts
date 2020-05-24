@@ -1,10 +1,15 @@
-const localStorageKeyName = 'recordList';
+import clone from '@/lib/clone';
 
-const modelListModel = {
+const localStorageKeyName = 'recordList';
+const recordListModel = {
   data:[] as RecordList[],
-  clone(data: RecordList[] | RecordList){
-    return JSON.parse(JSON.stringify(data))
+  create(record: RecordList){
+    this.data = this.fetch();
+    const record2 = clone(record);
+    recordListModel.data.push(record2);
+    this.save();
   },
+  
   fetch() {
     return JSON.parse(window.localStorage.getItem(localStorageKeyName) || '[]') as RecordList[];
   },
@@ -13,4 +18,4 @@ const modelListModel = {
   }
 };
 
-export {modelListModel};
+export {recordListModel};
