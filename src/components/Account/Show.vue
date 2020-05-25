@@ -1,16 +1,19 @@
 <template>
   <div class="show">
     <div class="text">金额</div>
-    <div class="number"></div>
+    <div class="number">{{data.output}}</div>
   </div>
 </template>
 
 <script lang="ts">
   import Vue from 'vue';
   import {Component} from 'vue-property-decorator';
+  import personStore from '@/store/personStore';
+
 
   @Component
   export default class Show extends Vue {
+    data = personStore.data
   }
 </script>
 

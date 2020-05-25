@@ -26,14 +26,12 @@
   import Type from '@/components/Type.vue';
   import {labelListModel} from '@/views/models/labelListModel';
 
-  labelListModel.fetch();
   @Component({
     components: {Type}
   })
   export default class Label extends Vue {
     labels = labelListModel.data.map(item => item.name);
     clickLabel = '';
-
     createLabel() {
       const name = window.prompt('请输入标签名');
       if (name) {
@@ -48,7 +46,6 @@
         window.alert('标签名不能为空');
       }
     }
-
     editLabel() {
       const name = window.prompt('请输入新的标签名');
       if (name) {

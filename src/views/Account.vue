@@ -19,15 +19,12 @@
   import { recordListModel } from './models/recordListModel';
   import {labelListModel} from '@/views/models/labelListModel';
 
-  const labelList = labelListModel.fetch().map(item=>item.name);
-
   @Component({
     components: {Show, Write, Note, Choice, Type},
   })
   export default class Account extends Vue {
-    labels = labelList;
+    labels = labelListModel.data.map(item=>item.name);
     record: RecordList = {type: '+',choice:'默认',note: '',amount: 123};
-    output = '0';
 
     onOutputChange() {
       console.log('检测到 output 变化啦');

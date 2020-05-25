@@ -25,19 +25,17 @@
   @Component
   export default class Write extends Vue {
     remove(){
-      // todo
       personStore.remove();
     }
     empty(){
       personStore.empty();
-
     }
     inputContent(event: MouseEvent){
       personStore.inputContent(event);
     }
     ok(){
-      this.$emit('update:amount',personStore.output);
-      this.$emit('submit',personStore.output);
+      this.$emit('update:amount',personStore.data.output);
+      this.$emit('submit',personStore.data.output);
     }
   }
 </script>

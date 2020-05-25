@@ -1,30 +1,29 @@
 const store =  {
-  output: '124',
-  fetchOutput() {
-    return this.output;
-  },
+  testData: '0',
+  data:{output:'0'},
   remove(){
-    if(this.output.length<=1){
-      this.output = '0';
+    if(this.data.output.length<=1){
+      this.data.output = '0';
     }else{
-      this.output = this.output.slice(0,-1)
+      this.data.output = this.data.output.slice(0,-1)
     }
   },
   empty(){
-    this.output = '0';
+    this.data.output = '0';
   },
   inputContent(event: MouseEvent){
     const input = (event.target as HTMLButtonElement).textContent as string;
-    if(this.output.length<=16){
-      if(this.output ==='0' && input !=='.'){
-        this.output = input;
+    if(this.data.output.length<=16){
+      if(this.data.output ==='0' && input !=='.'){
+        this.data.output = input;
       }else{
-        if(this.output.indexOf('.')>=0 && input ==='.'){
+        if(this.data.output.indexOf('.')>=0 && input ==='.'){
           return
         }
-        this.output += input;
+        this.data.output += input;
       }
     }
   }
 };
+
 export default store
