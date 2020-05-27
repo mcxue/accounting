@@ -14,7 +14,7 @@
   export default class Note extends Vue {
     @Watch('value')
     onNoteChanged(){
-      this.$emit('update:note',this.value);
+      this.$emit('note',this.value);
     }
     value = '';
   }

@@ -1,10 +1,10 @@
 <template>
   <Layout name="记账" class-prefix="layout">
-    <Type :type.sync="record.type"/>
-    <Choice :selected.sync="record.choice" :data.sync="labels"/>
-    <Note :value="record.note" @update:note="onUpdateNote"/>
-    <Show @ok="onOutputChange"/>
-    <Write @update:amount="onUpdateAmount" @submit="saveRecord"/>
+    <Type :value.sync='record.type'/>
+    <Choice :value.sync="record.choice"/>
+    <Note @note="record.note = $event"/>
+    <Show/>
+    <Write @ok="submit"/>
   </Layout>
 </template>
 
@@ -16,30 +16,39 @@
   import Note from '@/components/Account/Note.vue';
   import Write from '@/components/Account/Write.vue';
   import Show from '@/components/Account/Show.vue';
-  import { recordListModel } from './models/recordListModel';
-  import {labelListModel} from '@/views/models/labelListModel';
+
+  type OneRecord = {
+    type: string;
+    choice: string;
+    note: string;
+    amount: string;
+    date?: string;
+  }
 
   @Component({
     components: {Show, Write, Note, Choice, Type},
   })
   export default class Account extends Vue {
-    labels = labelListModel.data.map(item=>item.name);
-    record: RecordList = {type: '+',choice:'默认',note: '',amount: 123};
 
-    onOutputChange() {
-      console.log('检测到 output 变化啦');
+    beforeCreate() {
+      this.$store.commit('fetchLabels');
+      this.$store.commit('fetchRecords')
     }
 
-    onUpdateNote(note: string) {
-      this.record.note = note;
+    get defaultChoice() {
+      return this.$store.state.labels[0];
     }
 
-    onUpdateAmount(amount: string) {
-      this.record.amount = parseFloat(amount);
-    }
-    saveRecord(){
-      this.record.createdAt = new Date;
-      recordListModel.create(this.record);
+    record: OneRecord = {type: '-', choice: this.defaultChoice, note: '', amount: '0'};
+
+    submit($event: string) {
+      this.record.amount = $event;
+      this.record.date = new Date().toISOString();
+      this.$store.commit('createRecords', this.record);
+      window.alert('保存成功');
+      this.$store.state.writeNumber = '0';
+      this.record.type = '-';
+      this.record.choice = this.defaultChoice;
     }
   }
 </script>

@@ -8,12 +8,12 @@
         <li v-for="label in labels" :key="label" @click.capture="clickLabel=label">
           <span>{{label}}</span>
           <div>
-            <Icon :value="label" name="edit" @click="editLabel"/>
-            <Icon name="delete" @click="deleteLabel"/>
+            <Icon :value="label" name="edit" @click="updateLabel"/>
+            <Icon name="delete" @click="removeLabel"/>
           </div>
         </li>
       </ul>
-      <div class="createLabel" @click="createLabel">
+      <div class="createLabel" @click="generatorLabel">
         <button>新建标签</button>
       </div>
     </Layout>
@@ -24,52 +24,49 @@
   import Vue from 'vue';
   import {Component} from 'vue-property-decorator';
   import Type from '@/components/Type.vue';
-  import {labelListModel} from '@/views/models/labelListModel';
+  import store from '@/store/index'
 
   @Component({
-    components: {Type}
-  })
-  export default class Label extends Vue {
-    labels = labelListModel.data.map(item => item.name);
-    clickLabel = '';
-    createLabel() {
-      const name = window.prompt('请输入标签名');
-      if (name) {
-        const message = labelListModel.create(name);
-        if (message === 'duplicated') {
-          window.alert('标签名重复啦');
-        } else {
-          window.alert('新建标签成功');
-          this.labels = labelListModel.data.map(item => item.name);
-        }
-      } else {
-        window.alert('标签名不能为空');
+    components: {Type},
+    computed: {
+      labels() {
+        return store.state.labels;
       }
     }
-    editLabel() {
-      const name = window.prompt('请输入新的标签名');
+  })
+  export default class Label extends Vue {
+    clickLabel = '';
+    beforeCreate(){
+      this.$store.commit('fetchLabels')
+    }
+
+    generatorLabel() {
+      const name = window.prompt('请输入标签名');
       if (name) {
-        const message = labelListModel.edit(this.clickLabel, name);
-        if (message === 'duplicated') {
-          window.alert('标签名重复啦');
-        } else {
-          window.alert('编辑标签名成功');
-          this.labels = labelListModel.data.map(item => item.name);
-        }
+        this.$store.commit('createLabel', name);
       } else {
         window.alert('标签名不能为空');
       }
     }
 
-    deleteLabel() {
-      console.log(this.clickLabel);
-      const message = labelListModel.delete(this.clickLabel);
-      if(message ==='success'){
-        window.alert('删除标签成功');
-        this.labels = labelListModel.data.map(item => item.name);
-      }else{
-        window.alert('删除标签失败')
+    updateLabel() {
+      const newName = window.prompt('请输入新的标签名');
+      const oldName = this.clickLabel;
+      if (newName) {
+        this.$store.commit('editLabel', {oldName, newName});
+      } else if(newName ==='') {
+        window.alert('标签名不能为空');
+      }else {
+        return
       }
+    }
+
+    removeLabel() {
+      const name = this.clickLabel;
+      if(window.confirm('确认要删除改标签吗')){
+        this.$store.commit('deleteLabel', name);
+      }
+
     }
   }
 </script>

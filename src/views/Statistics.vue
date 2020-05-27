@@ -1,24 +1,13 @@
 <template>
   <div>
     <Layout name="统计">
-      <Type/>
-      <ul class="toggle">
-        <li class="selected">按年</li>
-        <li>按月</li>
-      </ul>
-      <div>折线图</div>
-      <div class="list">
-        <div class="text-wrapper">
-          <Icon name="trophy"/>
-          <span>排行榜</span>
-        </div>
-        <ul class="records">
-          <li class="expend"><span>衣</span><span>外套</span><span>￥199.00</span></li>
-          <li class="expend"><span>食</span><span>红烧鸡米饭</span><span>￥12.00</span></li>
-          <li class="expend"><span>食</span><span>小混沌</span><span>￥12.00</span></li>
-        </ul>
+      <div class="top">
+        {{currentYear}}年{{currentMonth}}月
       </div>
+      <LineChart :xData="xData" :yData="yDate"/>
+      <div class="show"><span>支出: {{collect[0]}} 元 | 收入: {{collect[1]}} 元</span></div>
     </Layout>
+
   </div>
 </template>
 
@@ -26,87 +15,101 @@
   import Vue from 'vue';
   import {Component} from 'vue-property-decorator';
   import Type from '@/components/Type.vue';
+  import LineChart from '@/components/Statistics/LineChart.vue';
 
   @Component({
-    components: {Type}
+    components: {LineChart, Type}
   })
   export default class Statistics extends Vue {
-    
+    type = '-';
+
+    beforeCreate() {
+      this.$store.commit('fetchRecords');
+    }
+
+    get records() {
+      return this.$store.state.records;
+    }
+    get xData() {
+      const date = new Date();
+      const array = [];
+      date.setMonth(date.getMonth() + 1);
+      date.setDate(0);
+      for (let i = 1; i <= date.getDate(); i++) {
+        array.push(i);
+      }
+      return array;
+    }
+
+    get currentYear() {
+      return new Date().getFullYear();
+    }
+
+    get currentMonth() {
+      return new Date().getMonth() + 1;
+    }
+    get yDate(){
+      // 1. 筛选出当月的有效数据
+
+      const usefulRecords=[];
+      for(let i=0;i<this.records.length;i++){
+        const recordYear = this.records[i].date.split('-')[0];
+        const recordMonth = this.records[i].date.split('-')[1];
+        if(parseInt(recordYear)===this.currentYear && parseInt(recordMonth)===this.currentMonth){
+          usefulRecords.push(this.records[i])
+        }
+      }
+      // 2. 区分收入和支出归类
+      const length = this.xData.length;
+      const commitData1=[];
+      const commitData2=[];
+      for(let i=0;i<length;i++){
+        commitData1[i]=0;
+        commitData2[i]=0;
+      }
+      for(let i=0;i<usefulRecords.length;i++){
+        const recordDay = usefulRecords[i].date.split('-')[2].split('T')[0];
+        const location = recordDay-1;
+        if(usefulRecords[i].type==='-'){
+          commitData1[location] += parseFloat(usefulRecords[i].amount);
+        }else{
+          commitData2[location] += parseFloat(usefulRecords[i].amount);
+        }
+      }
+      return [commitData1,commitData2];
+    }
+    get collect(){
+      let collect1 = 0;
+      let collect2 = 0;
+      for(let i=0;i<this.yDate[0].length;i++){
+        collect1 += this.yDate[0][i];
+        collect2 += this.yDate[1][i];
+      }
+      return [collect1,collect2]
+    }
   }
 </script>
 
 <style lang="scss" scoped>
   @import "~@/assets/helper.scss";
-  .toggle{
-    margin:10px 0;
-    background: white;
-    padding:5px 0;
-    display: flex;
-    >li{
-      min-width: 52px;
-      text-align: center;
-      padding:5px 10px;
-      margin:5px 10px;
-      background: #ddd;
-      border-radius: 15px;
-      &.selected{
-        background: $color-sky-blue;
-        color: #ffffff;
-      }
-    }
+
+  .top {
+    background: #0066cc;
+    line-height: 24px;
+    font-size: 16px;
+    color: white;
+    vertical-align: center;
+    padding: 13px 15px;
   }
-  .list {
-    >.text-wrapper{
-      display:flex;
-      align-items: center;
-      margin:10px 10px;
-
-      >.trophy{
-      }
-      >span{
-        padding-left: 5px;
-        font-weight: bold;
-      }
+  .show{
+    text-align: center;
+    background: #0066cc;
+    border-radius: 10px;
+    padding:5px 0;
+    >span{
+      color: white;
     }
 
-    >.records {
-      padding-left: 0;
 
-      > li {
-        padding: 3px 5px;
-        background: #fff;
-        border-radius: 4px;
-        margin: 10px 0;
-
-        &::after {
-          content: '';
-          display: block;
-          clear: both;
-        }
-
-        > span {
-          margin: 0 10px;
-
-          &:nth-child(1) {
-            float: left;
-          }
-
-          &:nth-child(2) {
-            float: left;
-            color: #999999;
-          }
-        }
-
-        &.expend > span:nth-child(3) {
-          float: right;
-          color: red;
-        }
-
-        &.income > span:nth-child(3) {
-          float: right;
-          color: #029202;
-        }
-      }
-    }
   }
 </style>

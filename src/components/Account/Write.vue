@@ -20,22 +20,20 @@
 <script lang="ts">
   import Vue from 'vue';
   import {Component} from 'vue-property-decorator';
-  import personStore from '@/store/personStore';
 
   @Component
   export default class Write extends Vue {
     remove(){
-      personStore.remove();
+      this.$store.commit('removeNumber')
     }
     empty(){
-      personStore.empty();
+      this.$store.commit('emptyNumber')
     }
     inputContent(event: MouseEvent){
-      personStore.inputContent(event);
+      this.$store.commit('inputNumber',event);
     }
     ok(){
-      this.$emit('update:amount',personStore.data.output);
-      this.$emit('submit',personStore.data.output);
+      this.$emit('ok',this.$store.state.writeNumber);
     }
   }
 </script>
@@ -48,7 +46,7 @@
     width:100vw;
     >button{
       float:left;
-      $height:64px;
+      $height:52px;
       width:25%;
       height:$height;
       text-align: center;

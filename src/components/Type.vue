@@ -1,7 +1,8 @@
 <template>
+
   <ul>
-    <li :class="{selected: type==='+'}" @click="toggle('+')">支出</li>
-    <li :class="{selected: type==='-'}" @click="toggle('-')">收入</li>
+    <li :class="{selected: value==='-'}" @click="toggle('-')">支出</li>
+    <li :class="{selected: value==='+'}" @click="toggle('+')">收入</li>
   </ul>
 </template>
 
@@ -11,9 +12,9 @@
 
   @Component
   export default class Type extends Vue {
-    @Prop({default:'-'}) readonly type!: string;
+    @Prop() readonly value!: string;
     toggle(value: string) {
-      this.$emit('update:type',value)
+      this.$emit('update:value',value);
     }
   }
 </script>
@@ -37,7 +38,7 @@
         position: relative;
 
         &::after {
-          $width: 32px;
+          $width: 50px;
           content: '';
           position: absolute;
           left: 50%;

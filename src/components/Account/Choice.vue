@@ -1,10 +1,10 @@
 <template>
   <div class="choice-wrapper">
-    <div>类别</div>
+    <div>标签</div>
     <ul>
-      <li v-for="value in data" :key="value"
-          :class="{selected:selected===value}"
-          @click="toggle(value)">{{value}}</li>
+      <li v-for="value2 in $store.state.labels" :key="value2"
+          :class="{selected:value2===value}"
+          @click="toggle(value2)">{{value2}}</li>
     </ul>
   </div>
 
@@ -16,12 +16,13 @@
 
   @Component
   export default class Choice extends Vue {
-    @Prop() readonly data!: string[];
-    @Prop() readonly selected!: string;
+    @Prop(String) readonly value!: string;
     toggle(label: string){
-      this.$emit('update:selected',label)
+      this.$emit('update:value',label)
     }
-
+    created(){
+      this.$store.commit('fetchLabels')
+    }
   }
 </script>
 
