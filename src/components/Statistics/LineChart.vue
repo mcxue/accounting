@@ -28,8 +28,11 @@
           data: this.xData
         },
         yAxis: {
+          axisTick:{
+            show: false
+          },
           axisLabel:{
-            inside:true
+            rotate:-45,
           },
           type: 'value'
         },

@@ -2,6 +2,7 @@
 const path = require('path')
 
 module.exports = {
+  publicPath: '/accounting/',
   lintOnSave: false,
   chainWebpack: config => {
     const dir = path.resolve(__dirname, 'src/assets/icons')
