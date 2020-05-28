@@ -1,5 +1,4 @@
 <template>
-
   <ul>
     <li :class="{selected: value==='-'}" @click="toggle('-')">支出</li>
     <li :class="{selected: value==='+'}" @click="toggle('+')">收入</li>

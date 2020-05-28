@@ -24,7 +24,7 @@ new Vue({
 if(document.documentElement.clientWidth>500){
   window.alert('请使用手机浏览，以保证显示效果');
   const img = window.document.createElement('img');
-  img.src='/qrcode.png';
+  img.src='/accounting/qrcode.png';
   document.body.append(img);
   img.style.position='fixed';
   img.style.left='50%';
