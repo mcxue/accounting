@@ -41,7 +41,7 @@
     }
 
     generatorLabel() {
-      const name = window.prompt('请输入标签名');
+      const name = window.prompt('请输入标签名',);
       if (name) {
         this.$store.commit('createLabel', name);
       } else {
@@ -65,8 +65,9 @@
       const name = this.clickLabel;
       if(window.confirm('确认要删除改标签吗')){
         this.$store.commit('deleteLabel', name);
+      }else{
+        return
       }
-
     }
   }
 </script>

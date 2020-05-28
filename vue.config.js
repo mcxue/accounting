@@ -2,6 +2,16 @@
 const path = require('path')
 
 module.exports = {
+  pwa: {
+    name: 'Test',
+    iconPaths: {
+      favicon32: './public/img/my-favicons',
+      favicon16: './public/img/my-favicons',
+      appleTouchIcon: './public/img/my-favicons',
+      maskIcon: './public/img/my-favicons',
+      msTileImage: './public/img/my-favicons'
+    }
+  },
   publicPath: '/accounting/',
   lintOnSave: false,
   chainWebpack: config => {
