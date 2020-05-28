@@ -10,7 +10,7 @@
         <div class="text">
           <Icon name="note"/>
           <span>最近</span></div>
-        <RecordShow :value="5"/>
+        <RecordShow :value="7"/>
       </div>
     </Layout>
   </div>

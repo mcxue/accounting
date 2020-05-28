@@ -37,7 +37,7 @@
       if(this.value){
         return newRecords.slice(0,this.value)
       }
-      return newRecords;
+      return newRecords.reverse();
     }
     removeRecord(clicked: string){
       console.log(clicked);

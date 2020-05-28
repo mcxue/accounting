@@ -4,7 +4,7 @@
       <div class="top">
         {{currentYear}}年{{currentMonth}}月
       </div>
-      <LineChart :xData="xData" :yData="yDate"/>
+      <LineChart :xData="xData" :yData="yData"/>
       <div class="show"><span>支出: {{collect[0]}} 元 | 收入: {{collect[1]}} 元</span></div>
     </Layout>
 
@@ -48,7 +48,7 @@
     get currentMonth() {
       return new Date().getMonth() + 1;
     }
-    get yDate(){
+    get yData(){
       // 1. 筛选出当月的有效数据
 
       const usefulRecords=[];
@@ -81,9 +81,9 @@
     get collect(){
       let collect1 = 0;
       let collect2 = 0;
-      for(let i=0;i<this.yDate[0].length;i++){
-        collect1 += this.yDate[0][i];
-        collect2 += this.yDate[1][i];
+      for(let i=0;i<this.yData[0].length;i++){
+        collect1 += this.yData[0][i];
+        collect2 += this.yData[1][i];
       }
       return [collect1,collect2]
     }
