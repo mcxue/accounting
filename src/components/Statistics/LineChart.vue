@@ -35,25 +35,25 @@
           type: 'value'
         },
         series: [{
-          name: '收入',
+          name: '支出',
           data: this.yData[0],
           type: 'line',
           itemStyle: {
             normal: {
               lineStyle: {
-                color: '#029202'
+                color: '#FF0000'
               }
             }
           },
         },
           {
-            name: '支出',
+            name: '收入',
             data: this.yData[1],
             type: 'line',
             itemStyle: {
               normal: {
                 lineStyle: {
-                  color: '#FF0000'
+                  color: '#029202'
                 }
               }
             },

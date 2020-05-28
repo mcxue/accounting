@@ -90,6 +90,14 @@ const store = new Vuex.Store({
       // state.records = JSON.parse(fakeDate || '[]') as RecordList[];
       state.records = JSON.parse(window.localStorage.getItem(localStorageKeyName2) || '[]') as RecordList[];
     },
+    deleteRecord(state,date: string){
+      for(let i=0;i<state.records.length;i++){
+        if(state.records[i].date===date){
+          state.records.splice(i,1)
+        }
+      }
+      store.commit('saveRecords');
+    },
     saveRecords(state) {
       window.localStorage.setItem(localStorageKeyName2, JSON.stringify(state.records));
       

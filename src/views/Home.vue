@@ -2,7 +2,7 @@
   <div>
     <Layout name="首页">
       <div class="record">
-        <div class="month">Hello,今天是</div>
+        <div class="month">今天是</div>
         <div class="number">{{year}}年{{month}}月{{day}}日</div>
         <div class="numbers">点击下方「记账」记一笔吧~</div>
       </div>

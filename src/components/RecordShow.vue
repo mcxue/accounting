@@ -3,11 +3,12 @@
     <div class="label-wrapper">
       <ul class="records">
         <li v-for="(record,index) in newRecords"
+            @click.capture="clicked=record.date"
             :class="{expend:record.type ==='-',income:record.type==='+'}"
             :key="index">
           <span>{{record.choice}}</span>
           <span>{{record.note}}</span>
-          <span>{{record.date}}</span>
+          <span @click="removeRecord(clicked)">{{record.date2}}</span>
           <span>￥{{record.amount}}</span>
         </li>
       </ul>
@@ -21,6 +22,7 @@
   
   @Component
   export default class RecordShow extends Vue {
+    clicked = '';
     @Prop() value?: number;
     beforeCreate() {
       this.$store.commit('fetchRecords');
@@ -30,12 +32,18 @@
       const newRecords = this.$store.state.records;
       for (let i = 0; i < newRecords.length; i++) {
         const newDate = newRecords[i].date;
-        newRecords[i].date = (newDate as string).split('T')[0].replace(/-/g, '/');
+        newRecords[i].date2 = (newDate as string).split('T')[0].replace(/-/g, '/');
       }
       if(this.value){
-        return newRecords.reverse().slice(0,this.value)
+        return newRecords.slice(0,this.value)
       }
-      return newRecords.reverse();
+      return newRecords;
+    }
+    removeRecord(clicked: string){
+      console.log(clicked);
+      if(window.confirm('确认要删除这条记录吗')){
+        this.$store.commit('deleteRecord',clicked)
+      }
     }
   }
 </script>
