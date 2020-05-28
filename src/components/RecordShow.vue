@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="label-wrapper">
+      <div class="noRecord" :style="newRecords.length===0?'':'display: none' ">{{"暂无记录"}}</div>
       <ul class="records">
         <li v-for="(record,index) in newRecords"
             @click.capture="clicked=record.date"
@@ -19,7 +20,6 @@
 <script lang="ts">
   import Vue from 'vue';
   import {Component,Prop} from 'vue-property-decorator';
-  
   @Component
   export default class RecordShow extends Vue {
     clicked = '';
@@ -35,7 +35,7 @@
         newRecords[i].date2 = (newDate as string).split('T')[0].replace(/-/g, '/');
       }
       if(this.value){
-        return newRecords.slice(0,this.value)
+        return newRecords.reverse().slice(0,this.value)
       }
       return newRecords.reverse();
     }
@@ -51,7 +51,9 @@
 <style lang="scss" scoped>
   .label-wrapper {
     margin: 20px 0;
-
+    .noRecord{
+      margin-left: 20px;
+    }
     .records {
       padding-left: 0;
 
