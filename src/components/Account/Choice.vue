@@ -29,7 +29,8 @@
 <style lang="scss" scoped>
   @import "~@/assets/helper.scss";
   .choice-wrapper{
-    flex-grow: 1;
+    // 设置成 1 时，页面总是有一点点小晃动，所以设置成 0.99
+    flex-grow: 0.99;
     display: flex;
     justify-content: center;
     align-items: center;
