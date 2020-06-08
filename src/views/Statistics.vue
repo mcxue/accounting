@@ -56,8 +56,6 @@
       for(let i=0;i<this.records.length;i++){
         const recordYear = dayjs(this.records[i].date).format('YYYY');
         const recordMonth = dayjs(this.records[i].date).format('MM');
-        console.log(this.currentMonth);
-        console.log(this.currentYear);
         if(recordYear===this.currentYear && recordMonth===this.currentMonth){
           usefulRecords.push(this.records[i])
         }
