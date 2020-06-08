@@ -1,29 +1,27 @@
-# accounting
+# 浪浪记账
 
-## Project setup
-```
-yarn install
-```
+## 简介
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+浪浪记账是一款简单又好看的记账应用，也是一款基于 Vue、VueRouter、Vuex、TypeScript 的单页面应用
 
-### Compiles and minifies for production
-```
-yarn build
-```
+## 知识
 
-### Run your unit tests
-```
-yarn test:unit
-```
+遇到了很多零零散散的知识，在此汇集一下
 
-### Lints and fixes files
-```
-yarn lint
-```
+* Vue Router
+* 封装组件和应用组件
+* 使用插槽
+* 引入 svg
+* 数据传递
+* 全局数据管理
+* HTML、CSS、SCSS
+* JavaScript / TypeScript
+* Vue 装饰器
+* 命名习惯
+* mixins
+* echarts
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## 一些 bug
+
+* windows.alert、windows.prompt、windows.confirm 在有些浏览器很霸道，体验不是特别好
+* 每次的记录都是 ISO 8601，换算我们中国的日期要加 8 个小时

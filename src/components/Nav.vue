@@ -1,6 +1,6 @@
 <template>
     <nav>
-      <router-link to="/home" class="item" active-class="selected"><Icon name="home"/>主页</router-link>
+      <router-link to="/home" class="item" active-class="selected"><Icon name="home"/>首页</router-link>
       <router-link to="/detail" class="item" active-class="selected"><Icon name="detail"/>明细</router-link>
       <router-link to="/account" class="item" active-class="selected"><Icon name="add"/>记账</router-link>
       <router-link to="/label" class="item" active-class="selected"><Icon name="label"/>标签</router-link>

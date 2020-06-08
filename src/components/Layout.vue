@@ -18,6 +18,7 @@
 <style lang="scss" scoped>
   .layout-wrapper{
     height:100vh;
+    min-height: 612px;
     display:flex;
     flex-direction:column;
     .content{

@@ -63,7 +63,7 @@
 
     removeLabel() {
       const name = this.clickLabel;
-      if(window.confirm('确认要删除改标签吗')){
+      if(window.confirm('确认要删除该标签吗')){
         this.$store.commit('deleteLabel', name);
       }else{
         return
