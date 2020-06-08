@@ -20,6 +20,8 @@
 <script lang="ts">
   import Vue from 'vue';
   import {Component,Prop} from 'vue-property-decorator';
+  import dayjs from 'dayjs';
+
   @Component
   export default class RecordShow extends Vue {
     clicked = '';
@@ -32,7 +34,8 @@
       const newRecords = this.$store.state.records;
       for (let i = 0; i < newRecords.length; i++) {
         const newDate = newRecords[i].date;
-        newRecords[i].date2 = (newDate as string).split('T')[0].replace(/-/g, '/');
+        console.log(dayjs(newDate).format('MM'));
+        newRecords[i].date2 = (dayjs(newDate).format('YYYY/MM/DD'))
       }
       if(this.value){
         return newRecords.reverse().slice(0,this.value)

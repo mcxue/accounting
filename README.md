@@ -15,7 +15,7 @@
 * 数据传递
 * 全局数据管理
 * HTML、CSS、SCSS
-* JavaScript / TypeScript
+* JavaScript + TypeScript
 * Vue 装饰器
 * 命名习惯
 * mixins
@@ -24,4 +24,3 @@
 ## 一些 bug
 
 * windows.alert、windows.prompt、windows.confirm 在有些浏览器很霸道，体验不是特别好
-* 每次的记录都是 ISO 8601，换算我们中国的日期要加 8 个小时

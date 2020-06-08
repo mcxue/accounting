@@ -16,13 +16,12 @@
   import {Component} from 'vue-property-decorator';
   import Type from '@/components/Type.vue';
   import LineChart from '@/components/Statistics/LineChart.vue';
-
+  import dayjs from 'dayjs';
   @Component({
     components: {LineChart, Type}
   })
   export default class Statistics extends Vue {
     type = '-';
-
     beforeCreate() {
       this.$store.commit('fetchRecords');
     }
@@ -42,20 +41,24 @@
     }
 
     get currentYear() {
-      return new Date().getFullYear();
+      const time = new Date().toISOString();
+      return dayjs(time).format('YYYY');
     }
 
     get currentMonth() {
-      return new Date().getMonth() + 1;
+      const time = new Date().toISOString();
+      return dayjs(time).format('MM');
     }
     get yData(){
       // 1. 筛选出当月的有效数据
 
       const usefulRecords=[];
       for(let i=0;i<this.records.length;i++){
-        const recordYear = this.records[i].date.split('-')[0];
-        const recordMonth = this.records[i].date.split('-')[1];
-        if(parseInt(recordYear)===this.currentYear && parseInt(recordMonth)===this.currentMonth){
+        const recordYear = dayjs(this.records[i].date).format('YYYY');
+        const recordMonth = dayjs(this.records[i].date).format('MM');
+        console.log(this.currentMonth);
+        console.log(this.currentYear);
+        if(recordYear===this.currentYear && recordMonth===this.currentMonth){
           usefulRecords.push(this.records[i])
         }
       }
