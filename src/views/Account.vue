@@ -42,13 +42,18 @@
     record: OneRecord = {type: '-', choice: this.defaultChoice, note: '', amount: '0'};
 
     submit($event: string) {
-      this.record.amount = $event;
-      this.record.date = new Date().toISOString();
-      this.$store.commit('createRecords', this.record);
-      window.alert('保存成功');
-      this.$store.state.writeNumber = '0';
-      this.record.type = '-';
-      this.record.choice = this.defaultChoice;
+      if($event ==='0'){
+        window.alert('金额忘记写啦');
+      }else{
+        this.record.amount = $event;
+        this.record.date = new Date().toISOString();
+        this.$store.commit('createRecords', this.record);
+        window.alert('保存成功');
+        this.$store.state.writeNumber = '0';
+        this.record.type = '-';
+        this.record.choice = this.defaultChoice;
+      }
+
     }
   }
 </script>
